@@ -13,6 +13,7 @@ If you like C/C++ development instead of MacroPython, you must have a look on my
 - **Mini WS2812** x8
 - **DIY MacroPad board** x1
 
+You can find Gerber in `pcb` folder.
 ![Schematic](images/MacroPad.png)
 
 # 3.Drivers
@@ -82,9 +83,11 @@ WS2812 LEDStrip(leds, LED_PIN, LED_LENGTH);
 You can find my library in `src/lib/WS2812` folder.
 
 ## 3.3 TinyUSB
-Write C/C++ to make hid interface come true would be a nightmare, but luckily `TinyUSB` support RP2040, and it's an offical example in pico-sdk examples.
+Write C/C++ to make hid interface come true would be a nightmare, but luckily `TinyUSB` support RP2040, and there's an offical example in pico-sdk examples.
 
-And it's easy to use them, you just need to initilize some fuctions, call `tud_task()` all time and use `tud_hid_keyboard_report()` to report key to your host like below.
+You can have a look here [Pi Pico Offical TinyUSB example](https://github.com/raspberrypi/pico-examples/tree/master/usb/device/dev_hid_composite).
+
+But it's easy to use TinyUSB, you just need to initilize some fuctions, call `tud_task()` all time and use `tud_hid_keyboard_report()` to report key to your host like below.
 
 ```cpp
 
@@ -111,12 +114,12 @@ int main(void) {
 
 ```
 
-You can have a look here [Pi Pico Offical TinyUSB example](https://github.com/raspberrypi/pico-examples/tree/master/usb/device/dev_hid_composite)
-
 And you can find it in my `src/lib/tinyusb` folder.
 
 ## 3.4 FreeRTOS
-Using FreeRTOS, you can manage multi tasks and similarily run them at the same time, and you just need to creat a task like this.
+Using FreeRTOS, you can manage multi tasks and similarily run them at the same time.
+
+You can creat a task like this and even more tasks.
 
 ```cpp
 
@@ -136,7 +139,7 @@ int main(){
 
 ```
 
-But you are not necessarily to use FreeRTOS in your project, if you are interested in how to setup FreeRTOS on raspberry pi pico, you can go to my another project [FreeRTOS on Raspberry Pi Pico](https://github.com/MR-Addict/FreeRTOS-on-Raspberry-Pi-Pico)
+But you are not necessarily to use FreeRTOS in your project, if you are interested in how to setup FreeRTOS on raspberry pi pico, you can go to my another project [FreeRTOS on Raspberry Pi Pico](https://github.com/MR-Addict/FreeRTOS-on-Raspberry-Pi-Pico).
 
 ## 3.5 Custom Your MacroPad Key
 I custom 8 keys on my macropad, and you can change it in `buttonkey` arrey.
