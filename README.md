@@ -22,12 +22,10 @@ In this projects, almost all of the components wee need to driver ourselves, thu
 Next, I gonna to talk about detailed process about how to drive them.
 
 ## 3.1 Rotary Encoder & Mechanical Key
-I believe that all of you know how use buttons, so I gonna skipp this part.
 
 Though it's mechanical Key, but it's just some buttons which are more nice and expensive. Here is an example.
 
 ```cpp
-
 int main() {
     Button button(11);
     Encoder encoder(14, 15);
@@ -49,7 +47,6 @@ int main() {
     }
     return 0;
 }
-
 ```
 
 You can find my library in `src/lib/Encoder` folder.
@@ -74,10 +71,8 @@ And I think it's really really not easy to use them. You can follow bellow artic
 And I suggest directily use my library or ForsakenNGS's library, that's would be an easy way. Just like below.
 
 ```cpp
-
 RGB leds[LED_LENGTH];
 WS2812 LEDStrip(leds, LED_PIN, LED_LENGTH);
-
 ```
 
 You can find my library in `src/lib/WS2812` folder.
@@ -87,10 +82,9 @@ Write C/C++ to make hid interface come true would be a nightmare, but luckily `T
 
 You can have a look here [Pi Pico Offical TinyUSB example](https://github.com/raspberrypi/pico-examples/tree/master/usb/device/dev_hid_composite).
 
-But it's easy to use TinyUSB, you just need to initilize some fuctions, call `tud_task()` all time and use `tud_hid_keyboard_report()` to report key to your host like below.
+But it's easy to use TinyUSB, you just need to initilize by calling two fuctions, call `tud_task()` all the time and use `tud_hid_keyboard_report()` to report keyboard event to your host like below.
 
 ```cpp
-
 void hid_task(void) {
     if (tud_hid_ready()) {
         if (button.isPressed()) {
@@ -111,7 +105,6 @@ int main(void) {
     }
     return 0;
 }
-
 ```
 
 And you can find it in my `src/lib/tinyusb` folder.
@@ -122,7 +115,6 @@ Using FreeRTOS, you can manage multi tasks and similarily run them at the same t
 You can creat a task like this and even more tasks.
 
 ```cpp
-
 void led_task(void* parameter) {
     while (true) {
         LEDStrip.fillSolid(CHSV(colorIndex++, 255, 255));
@@ -136,7 +128,6 @@ int main(){
     vTaskStartScheduler();
     return 0;
 }
-
 ```
 
 But you are not necessarily to use FreeRTOS in your project, if you are interested in how to setup FreeRTOS on raspberry pi pico, you can go to my another project [FreeRTOS on Raspberry Pi Pico](https://github.com/MR-Addict/FreeRTOS-on-Raspberry-Pi-Pico).
@@ -145,13 +136,11 @@ But you are not necessarily to use FreeRTOS in your project, if you are interest
 I custom 8 keys on my macropad, and you can change it in `buttonkey` arrey.
 
 ``` cpp
-
 uint8_t buttonkey[LED_LENGTH] = {
     HID_KEY_S,      HID_KEY_Z,  
     HID_KEY_C,      HID_KEY_X,      HID_KEY_V,  
     HID_KEY_HOME,   HID_KEY_DELETE, HID_KEY_END
 };
-
 ```
 
-That's all.Have a happy kacking day!
+That's all.Happy kacking!
